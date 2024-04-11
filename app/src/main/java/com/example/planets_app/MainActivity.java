@@ -3,7 +3,10 @@ package com.example.planets_app;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -34,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
         Planet planet7= new Planet("Saturn","82",R.drawable.saturn);
         Planet planet8= new Planet("Jupiter","79",R.drawable.jupiter);
 
-        planetsArrayList.add(planet3);
         planetsArrayList.add(planet1);
         planetsArrayList.add(planet2);
+        planetsArrayList.add(planet3);
         planetsArrayList.add(planet4);
         planetsArrayList.add(planet5);
         planetsArrayList.add(planet6);
@@ -48,6 +51,16 @@ public class MainActivity extends AppCompatActivity {
         adapter =new MyCustomAdapter(planetsArrayList,getApplicationContext());
 
         listView.setAdapter(adapter);
+
+        //Handling Click Events
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this, "Planet Name: "+adapter.getItem(position).getPlanetName(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
     }
